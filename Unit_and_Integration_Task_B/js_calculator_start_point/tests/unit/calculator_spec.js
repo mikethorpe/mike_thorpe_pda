@@ -51,11 +51,13 @@ describe('calculator', function () {
   })
 
   it('it can chain multiple operations together', function(){
-    expected = 2;
+    expected = 1;
     calculator.numberClick(1);
     calculator.operatorClick('+');
     calculator.numberClick(1);
-    calculator.operatorClick('+');
+    calculator.operatorClick('-');
+    calculator.numberClick(1);
+    calculator.operatorClick('=');
     actual = calculator.previousTotal;
     assert.equal(expected, actual);
   })
@@ -66,7 +68,7 @@ describe('calculator', function () {
     calculator.operatorClick('+');
     calculator.clearClick();
     calculator.numberClick(1);
-    calculator.operatorClick('+');
+    calculator.operatorClick('=');
     actual = calculator.previousTotal;
     assert.equal(expected, actual);
   })
