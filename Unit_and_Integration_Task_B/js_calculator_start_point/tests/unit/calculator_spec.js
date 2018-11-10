@@ -7,7 +7,7 @@ describe('calculator', function () {
     calculator = new Calculator()
   });
 
-  // write unit tests here in the form of "it should do something..."
+  // unit tests
   it('it can add a number to the runing total', function() {
     calculator.previousTotal = 4;
     calculator.add(1);
@@ -38,6 +38,37 @@ describe('calculator', function () {
     expected = 3;
     actual = calculator.runningTotal;
     assert.equal(actual, expected);
+  })
+
+  // integration tests
+  it('it concatenates the number clicked with the others', function(){
+    expected = '123';
+    calculator.numberClick(1);
+    calculator.numberClick(2);
+    calculator.numberClick(3);
+    actual = calculator.runningTotal;
+    assert.equal(actual, expected);
+  })
+
+  it('it can chain multiple operations together', function(){
+    expected = 2;
+    calculator.numberClick(1);
+    calculator.operatorClick('+');
+    calculator.numberClick(1);
+    calculator.operatorClick('+');
+    actual = calculator.previousTotal;
+    assert.equal(expected, actual);
+  })
+
+  it('it can clear the running total without affecting the calculation', function(){
+    expected = 2;
+    calculator.numberClick(1);
+    calculator.operatorClick('+');
+    calculator.clearClick();
+    calculator.numberClick(1);
+    calculator.operatorClick('+');
+    actual = calculator.previousTotal;
+    assert.equal(expected, actual);
   })
 
 });
